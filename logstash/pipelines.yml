@@ -1,0 +1,2 @@
+- pipeline.id: log_ingestor_pipeline
+  path.config: "/usr/share/logstash/pipeline/log_ingestor_pipeline.conf"
