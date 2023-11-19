@@ -1,0 +1,24 @@
+version: "2.2"
+services:
+    log-ingestor-service:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./logs:/app/logs
+    logstash:
+        image: docker.elastic.co/logstash/logstash:8.6.2
+        volumes:
+            - ./logstash/conf.d/:/usr/share/logstash/pipeline/
+            - ./logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+            - ./logs:/app/logs
+        environment:
+            LS_JAVA_OPTS: -Xms256m -Xmx1g
+            ELASTICSEARCH_URL: ELASTICSEARCH_URL:9243
+            ELASTICSEARCH_HOSTS: "[ELASTICSEARCH_URL:9243]"
+            XPACK_MONITORING_ELASTICSEARCH_HOSTS: ELASTICSEARCH_URL:9243
+            XPACK_MONITORING_ELASTICSEARCH_USERNAME: ELASTICSEARCH_USERNAME
+            XPACK_MONITORING_ELASTICSEARCH_PASSWORD: ELASTIC_SEARCH_PASSWORD
+            XPACK_MONITORING_ENABLED: "true"

@@ -21,10 +21,9 @@ type LoggerRequestObject struct {
 type Metadata struct {
 		ParentResourceID string `json:"parentResourceId"`
 	}	
+// The function `writeToFile` writes a LoggerRequestObject to a file in JSON format.
 func writeToFile(req LoggerRequestObject) error {
-	// create file path with current day so that logs are stored in different files for different days
-	path := "./logs/" + time.Now().Format("2006-01-02") + ".log"
-	// create file if does not exists in the path, if exists open it
+	path := "./logs/" + "log_ingestor.log"
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -48,11 +47,11 @@ func writeToFile(req LoggerRequestObject) error {
 
 	return nil
 }
+// The handler function receives a POST request, decodes the request body into a LoggerRequestObject,
+// and writes the object to a file.
 
 func handler(w http.ResponseWriter, r *http.Request) {
-// for a post request at this route, parse the request body and write it to a file
 	if r.Method == "POST" {
-		// parse the request body
 		var req LoggerRequestObject
 		err := json.NewDecoder(r.Body).Decode(&req)
 		if err != nil {
@@ -67,6 +66,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// The main function sets up a server that listens on port 3000 and registers a handler function for
+// the root route ("/").
 func main() {
 	http.HandleFunc("/", handler)            // Register the handler function for the root ("/") route
 	err := http.ListenAndServe(":3000", nil) // Start the server on port 3000
