@@ -161,15 +161,19 @@ The following are some sample queries that will be executed for validation.
 -   Retrieve all logs related to resourceId "server-1234".
 -   ![Server 1234](./assets/serverId.png)
 -   Filter logs between the timestamp "2023-09-10T00:00:00Z" and "2023-09-15T23:59:59Z". (Bonus)
--   ![Time Filter](./assets/TimeStamp.png)
+-   ![Time Filter](./assets/Timestamp.png)
 
 ## Advanced Features (Bonus):
 
 These features aren’t compulsory to implement, however, adding them might increase the chances of your submission being accepted.
 
 -   Implement search within specific date ranges.
--   ![Time Filter](./assets/TimeFilter.png)
+    ![Time Filter](./assets/TimeFilter.png)
 -   Utilize regular expressions for search.
+    ![Regular Expression](./assets/regex.png)
 -   Allow combining multiple filters.
+    ![Multiple Filters](./assets/MultiFilter.png)
 -   Provide real-time log ingestion and searching capabilities - Logstash supports realtime log ingestion and searching thus this is implemented.
+
 -   Implement role-based access to the query interface . I have created a user with roles and only with those roles the user can access the Kibana Dashboard.
+    ![Role Based Access](./assets/rolebased.png)
